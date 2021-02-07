@@ -1,0 +1,10 @@
+node_modules/
+yarn.lock
+.next/
+.keystone
+build/
+.DS_Store
+*.log
+layout.md
+variables.env
+*.env
