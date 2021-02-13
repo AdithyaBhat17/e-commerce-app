@@ -25,6 +25,7 @@ const ItemStyles = styled.div`
     border-top: 1px solid var(--lightGray);
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     grid-gap: 1px;
+    text-align: center;
     background: var(--lightGray);
     & > * {
       background: white;

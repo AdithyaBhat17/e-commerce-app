@@ -32,8 +32,6 @@ export const CREATE_PRODUCT_MUTATION = gql`
 `;
 
 function CreateProduct() {
-  const router = useRouter();
-
   const { inputs, handleInputChange } = useForm({
     name: "",
     price: 0,
