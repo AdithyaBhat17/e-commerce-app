@@ -1,3 +1,9 @@
-export default function SellPage() {
-  return <div>Sell</div>;
+import Products from "../components/Products";
+
+export default function ProductsPage() {
+  return (
+    <div>
+      <Products />
+    </div>
+  );
 }
