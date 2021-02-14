@@ -10,8 +10,8 @@ const ProductsListStyles = styled.div`
 `;
 
 export const ALL_PRODUCTS = gql`
-  query ALL_PRODUCTS {
-    allProducts {
+  query ALL_PRODUCTS($skip: Int = 0, $first: Int) {
+    allProducts(skip: $skip, first: $first) {
       id
       name
       description
@@ -26,8 +26,13 @@ export const ALL_PRODUCTS = gql`
   }
 `;
 
-export default function Products() {
-  const { data, loading, error } = useQuery(ALL_PRODUCTS);
+export default function Products({ page, perPage = 2 }) {
+  const { data, loading, error } = useQuery(ALL_PRODUCTS, {
+    variables: {
+      skip: page * perPage - perPage,
+      first: perPage,
+    },
+  });
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Failed to load products...</div>;
