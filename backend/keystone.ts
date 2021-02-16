@@ -11,6 +11,7 @@ import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/ProductImage';
 import { Session } from './types';
 import { insertSeedData } from './seed-data';
+import { sendResetPasswordLink } from './mail';
 
 const databaseURL = process.env.DATABASE_URL || 'mongodb://localhost/sickfits';
 
@@ -26,6 +27,11 @@ const { withAuth } = createAuth({
   // allow creating a new user for the first time.
   initFirstItem: {
     fields: ['name', 'email', 'password'],
+  },
+  passwordResetLink: {
+    async sendToken({ token, identity }) {
+      await sendResetPasswordLink(token, identity);
+    },
   },
 });
 
