@@ -9,9 +9,11 @@ import {
 import { User } from './schemas/User';
 import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/ProductImage';
+import { Cart } from './schemas/Cart';
 import { Session } from './types';
 import { insertSeedData } from './seed-data';
 import { sendResetPasswordLink } from './mail';
+import { extendGraphqlSchema } from './mutations';
 
 const databaseURL = process.env.DATABASE_URL || 'mongodb://localhost/sickfits';
 
@@ -51,7 +53,8 @@ export default withAuth(
           await insertSeedData(keystone);
       },
     },
-    lists: createSchema({ User, Product, ProductImage }),
+    lists: createSchema({ User, Product, ProductImage, Cart }),
+    extendGraphqlSchema,
     ui: {
       // show keystone to users who pass the test.
       isAccessAllowed: ({ session }) => !!(session as Session)?.data,
