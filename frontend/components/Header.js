@@ -2,6 +2,7 @@ import Link from "next/link";
 import Nav from "./Nav";
 import styled from "styled-components";
 import Cart from "./Cart";
+import Search from "./Search";
 
 const HeaderStyles = styled.header`
   .bar {
@@ -46,7 +47,7 @@ export default function Header() {
         <Nav />
       </div>
       <div className='sub-bar'>
-        <p>Search</p>
+        <Search />
         <Cart />
       </div>
     </HeaderStyles>
