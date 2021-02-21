@@ -6,6 +6,7 @@ import CartItem from "./CartItem";
 import { formatMoney } from "../lib/formatMoney";
 import { calculateTotalPrice } from "../lib/calculateTotalPrice";
 import { useCart } from "../context/cart";
+import Checkout from "./Checkout";
 
 function Cart() {
   const me = useUser();
@@ -25,6 +26,7 @@ function Cart() {
         </ul>
         <footer>
           <p>{formatMoney(calculateTotalPrice(me.cart))}</p>
+          <Checkout />
         </footer>
       </CartStyles>
     </div>
