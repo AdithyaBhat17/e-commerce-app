@@ -8,3 +8,4 @@ build/
 layout.md
 variables.env
 *.env
+*.env.local

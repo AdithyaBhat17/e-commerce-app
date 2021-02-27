@@ -9,6 +9,8 @@ import {
 import { User } from './schemas/User';
 import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/ProductImage';
+import { Order } from './schemas/Order';
+import { OrderItem } from './schemas/OrderItem';
 import { Cart } from './schemas/Cart';
 import { Session } from './types';
 import { insertSeedData } from './seed-data';
@@ -53,7 +55,14 @@ export default withAuth(
           await insertSeedData(keystone);
       },
     },
-    lists: createSchema({ User, Product, ProductImage, Cart }),
+    lists: createSchema({
+      User,
+      Product,
+      ProductImage,
+      Cart,
+      Order,
+      OrderItem,
+    }),
     extendGraphqlSchema,
     ui: {
       // show keystone to users who pass the test.
