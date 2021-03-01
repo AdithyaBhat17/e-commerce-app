@@ -9,7 +9,7 @@ import { formatMoney } from "../../lib/formatMoney";
 
 export const SINGLE_ORDER_QUERY = gql`
   query SINGLE_ORDER($id: ID!) {
-    order: Order(where: { id: $id }) {
+    _order: Order(where: { id: $id }) {
       id
       charge
       total
@@ -40,7 +40,7 @@ function SingleOrderPage({ query }) {
   if (loading) return <p>Loading...</p>;
   if (error) return <ErrorMessage error={error} />;
 
-  const { order } = data;
+  const { _order } = data;
 
   return (
     <OrderStyles>
@@ -49,22 +49,22 @@ function SingleOrderPage({ query }) {
       </Head>
       <p>
         <span>Order ID:</span>
-        <span>{order?.id}</span>
+        <span>{_order?.id}</span>
       </p>
       <p>
         <span>Charge:</span>
-        <span>{order?.charge}</span>
+        <span>{_order?.charge}</span>
       </p>
       <p>
         <span>Order Total:</span>
-        <span>{formatMoney(order?.total / 100)}</span>
+        <span>{formatMoney(_order?.total / 100)}</span>
       </p>
       <p>
         <span>Item count:</span>
-        <span>{order?.items?.length}</span>
+        <span>{_order?.items?.length}</span>
       </p>
       <div className='items'>
-        {order?.items?.map((item) => (
+        {_order?.items?.map((item) => (
           <div className='order-item' key={item.id}>
             <img src={item.photo.image.publicUrlTransformed} alt={item.name} />
             <div className='order-details'>
