@@ -6,6 +6,7 @@ import {
   statelessSessions,
 } from '@keystone-next/keystone/session';
 
+import { Role } from './schemas/Role';
 import { User } from './schemas/User';
 import { Product } from './schemas/Product';
 import { ProductImage } from './schemas/ProductImage';
@@ -16,6 +17,7 @@ import { Session } from './types';
 import { insertSeedData } from './seed-data';
 import { sendResetPasswordLink } from './mail';
 import { extendGraphqlSchema } from './mutations';
+import { permissionsList } from './schemas/fields';
 
 const databaseURL = process.env.DATABASE_URL || 'mongodb://localhost/sickfits';
 
@@ -62,6 +64,7 @@ export default withAuth(
       Cart,
       Order,
       OrderItem,
+      Role,
     }),
     extendGraphqlSchema,
     ui: {
@@ -69,7 +72,12 @@ export default withAuth(
       isAccessAllowed: ({ session }) => !!(session as Session)?.data,
     },
     session: withItemData(statelessSessions(sessionConfig), {
-      User: 'id',
+      User: `
+        id
+        name
+        email
+        ${permissionsList.join('\n')}
+      `,
     }),
   })
 );

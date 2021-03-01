@@ -1,9 +1,8 @@
 import CreateProduct from "../components/CreateProduct";
+import SignIn from "../components/SignIn";
+import { useUser } from "../components/User";
 
 export default function SellPage() {
-  return (
-    <div>
-      <CreateProduct />
-    </div>
-  );
+  const me = useUser();
+  return <div>{me ? <CreateProduct /> : <SignIn />}</div>;
 }
